@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 
 // components
+import PostDetails from '../../components/PostDetails/PostDetails';
 
 const Home = () => {
   const [query, setQuery] = useState("");
@@ -22,14 +23,7 @@ const Home = () => {
         <button className="btn btn-dark">Pesquisar</button>
       </form>
       <h1>Posts recentes</h1>
-      {posts && posts.map((post) => (
-        <>
-          <h2>{post.title}</h2>
-          <img src={post.image}></img>
-          <p>{post.description}</p>
-          <p>{post.tagsArray}</p>
-        </>
-      ))}
+      {posts && posts.map((post) => ( <PostDetails key={post.id} post={post}/> ))}
       
       <div>
         {/* Criar validação de usuário logado */}
