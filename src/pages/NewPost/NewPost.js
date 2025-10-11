@@ -11,9 +11,11 @@ const NewPost = () => {
     const [tags, setTags] = useState([]);
     const [formError, setFormError] = useState("")
 
-    const {user} = useAuthValue()
+    const { user } = useAuthValue()
 
     const { insertDocument, response } = useInsertDocument("posts")
+
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,22 +30,27 @@ const NewPost = () => {
         }
 
         // Criar array de tags
+        const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase())
 
         // Checar todos os valores
+        if (!title || !image || !tags || !description) {
+            setFormError("Preencha todos os campos para continuar.")
+            return
+        }
 
-        if(formError) return;
+        if (formError) return;
 
         insertDocument({
-            title, 
-            image, 
+            title,
+            image,
             description,
-            tags,
+            tagsArray,
             uid: user.uid,
             createdBy: user.displayName
         });
 
         // Redirecionar para home
-
+        navigate("/")
     }
 
     return (
@@ -55,9 +62,10 @@ const NewPost = () => {
                 <label><textarea name="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder='Descrição do post'></textarea></label>
                 <label><input type="text" name="image" value={image} onChange={(e) => setImage(e.target.value)} placeholder='Url da Imagem' /></label>
                 <label><input type="text" name="tags" value={tags} onChange={(e) => setTags(e.target.value)} placeholder='Insira as tags separadas por vírgula' /></label>
-                {!response.loading && <input type="submit" value="Postar" className='btn'/>}
-                {response.loading && <input type="submit" value="Postando..." disabled className='btn'/>}
+                {!response.loading && <input type="submit" value="Postar" className='btn' />}
+                {response.loading && <input type="submit" value="Postando..." disabled className='btn' />}
                 {response.error && <p className='error'>{response.error}</p>}
+                {formError && <p className='error'>{formError}</p>}
             </form>
         </div>
     )
