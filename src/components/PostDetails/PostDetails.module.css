@@ -1,3 +1,9 @@
-.tags p{
+.postDetailContainer{
+    text-align: center;
+    margin: auto;
+    width: 80%;
+}
+
+.postDetailContainer .tags span{
     background-color: rgb(212, 239, 212);
 }

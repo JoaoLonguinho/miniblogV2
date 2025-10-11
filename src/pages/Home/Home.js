@@ -18,13 +18,12 @@ const Home = () => {
   }
   return (
     <div className={styles.home}>
+      <h1>Posts recentes</h1>
       <form onSubmit={handleSubmit} className='styles.search_form'>
         <input type="text" placeholder='Pesquisar post' value={query} onChange={(e) => setQuery(e.target.value)} />
         <button className="btn btn-dark">Pesquisar</button>
       </form>
-      <h1>Posts recentes</h1>
       {posts && posts.map((post) => ( <PostDetails key={post.id} post={post}/> ))}
-      
       <div>
         {/* Criar validação de usuário logado */}
         {posts && posts.length === 0 && (
