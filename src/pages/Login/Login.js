@@ -44,7 +44,7 @@ const Login = () => {
           <input type="password" name="password" required placeholder="Insira sua senha" value={password} onChange={(e) => setPassword(e.target.value)} />
         </label>
         {!loading && <button className="btn">Entrar</button>}
-        {loading && <button className="btn" disabled>Cadastrando...</button>}
+        {loading && <button className="btn" disabled>Entrando...</button>}
         {error && <p className="error">{error}</p>}
       </form>
     </div>

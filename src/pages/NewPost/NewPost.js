@@ -21,9 +21,17 @@ const NewPost = () => {
 
         // Validar url imagem
 
+        try {
+            new URL(image)
+        } catch (error) {
+            setFormError("A imagem precisa ser uma URL.");
+        }
+
         // Criar array de tags
 
         // Checar todos os valores
+
+        if(formError) return;
 
         insertDocument({
             title, 
