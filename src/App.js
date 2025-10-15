@@ -21,6 +21,7 @@ import Login from './pages/Login/Login';
 import NewPost from './pages/NewPost/NewPost';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Search from './pages/Search/Search';
+import Post from './pages/Post/Post';
 
 // pages
 
@@ -51,8 +52,9 @@ function App() {
               <Route path='/' element={<Home />}>Home</Route>
               <Route path='/about' element={<About />}>Sobre</Route>
               <Route path='/search' element={<Search />}>Pesquisar</Route>
-              <Route path='/register' element={!user ? <Register /> : <Navigate to="/posts/new"/>}></Route>
-              <Route path='/login' element={!user ? <Login /> : <Navigate to="/dashboard"/>}></Route>
+              <Route path='/posts/:id' element={<Post />}>Post </Route>
+              <Route path='/register' element={!user ? <Register /> : <Navigate to="/posts/new" />}></Route>
+              <Route path='/login' element={!user ? <Login /> : <Navigate to="/dashboard" />}></Route>
               <Route path='/posts/new' element={<NewPost />}></Route>
               <Route path='/dashboard' element={user ? <Dashboard /> : <Navigate to="/login" />}></Route>
             </Routes>
