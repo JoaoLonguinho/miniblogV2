@@ -44,11 +44,12 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
 
                 setLoading(false)
             } catch (error) {
+                setError(error.message)
                 console.log(error.message)
             }
         }
         loadData();
-    }, [docCollection, search, uid, canceled])
+    }, [docCollection, documents , search, uid, canceled])
 
 
     useEffect(() => {
