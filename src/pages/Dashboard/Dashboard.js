@@ -10,8 +10,12 @@ const Dashboard = () => {
     const { user } = useAuthValue()
     const uid = user.uid;
 
-    const {documents: posts, loading, error} = useFetchDocuments("posts", null, uid)
+    const { documents: posts, loading, error } = useFetchDocuments("posts", null, uid)
+    const deleteDocument = (id) => {}
 
+    if(loading){
+        return <p>Carregando...</p>
+    }
     return (
         <div>
             <h2>Dashboard</h2>
@@ -22,14 +26,26 @@ const Dashboard = () => {
                     <Link to="/posts/new/" className="btn">Criar meu primeiro post</Link>
                 </div>
             ) : (
-                <div>
-                    <p>Seus posts:</p>
-                </div>
+                <>
+                    
+                    <div>
+                        <span>Título do post</span>
+                        <span>Ações</span>
+                    </div>
+                    {posts && posts.map((post) => (
+                        <div key={post.id}>
+                            <p>{post.title}</p>
+                            <div>
+                                <Link to={`/posts/${post.id}`} className="btn btn-outline">Visualizar</Link>
+                                <Link to={`/posts/edit/${post.id}`} className="btn btn-outline">Editar</Link>
+                                <button onClick={() => deleteDocument(post.id)} className="btn btn-outline btn-danger">
+                                    Excluir
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </>
             )}
-
-            {posts && posts.map((post) => (
-                <h3 key={post.id}>{post.title}</h3>
-            ))}
         </div>
     )
 }
