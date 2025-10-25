@@ -28,6 +28,9 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
                 if (search){
                     q = await query (collectionRef, where('tagsArray', 'array-contains', search), orderBy('createdAt', 'desc'))
                 }
+                else if(uid){{
+                    q = await query (collectionRef, where('uid', '==', uid), orderBy('createdAt', 'desc')) // busca o post pelo id do usuário uid -> usuário id
+                }}
                 else {
                 q = await query(collectionRef, orderBy('createdAt', 'desc'))
                 }
@@ -49,7 +52,7 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
             }
         }
         loadData();
-    }, [docCollection, documents , search, uid, canceled])
+    }, [docCollection , search, uid, canceled])
 
 
     useEffect(() => {

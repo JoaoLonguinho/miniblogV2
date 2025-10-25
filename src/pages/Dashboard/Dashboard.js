@@ -10,8 +10,7 @@ const Dashboard = () => {
     const { user } = useAuthValue()
     const uid = user.uid;
 
-    // Posts do usuário
-    const posts = [];
+    const {documents: posts, loading, error} = useFetchDocuments("posts", null, uid)
 
     return (
         <div>
@@ -24,9 +23,13 @@ const Dashboard = () => {
                 </div>
             ) : (
                 <div>
-
+                    <p>Seus posts:</p>
                 </div>
             )}
+
+            {posts && posts.map((post) => (
+                <h3 key={post.id}>{post.title}</h3>
+            ))}
         </div>
     )
 }
