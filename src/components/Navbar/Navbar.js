@@ -1,5 +1,5 @@
 import styles from "./Navbar.module.css"
-import { NavLink, Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { useAuthentication } from "../../hooks/useAuthentication"
 import { useAuthValue } from "../../context/AuthContext"
 
@@ -42,6 +42,11 @@ const Navbar = () => {
             <li>
               <NavLink to="/posts/new" className={({ isActive }) => (isActive ? styles.active : "")}>
                 Novo Post
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/posts/edit/:id" className={({ isActive }) => (isActive ? styles.active : "")}>
+                Editar post
               </NavLink>
             </li>
           </>
