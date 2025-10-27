@@ -44,11 +44,6 @@ const Navbar = () => {
                 Novo Post
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/posts/edit/:id" className={({ isActive }) => (isActive ? styles.active : "")}>
-                Editar post
-              </NavLink>
-            </li>
           </>
         )}
         <li>
